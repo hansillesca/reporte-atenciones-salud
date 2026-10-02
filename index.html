@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Reporte de Atenciones de Salud</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+<header class="topbar">
+  <div>
+    <h1>📊 Reporte de Atenciones de Salud</h1>
+    <p>Dashboard público de gestión · datos anonimizados</p>
+  </div>
+  <div class="updated" id="updated">Actualizando...</div>
+</header>
+
+<main>
+  <section class="kpis">
+    <div class="card"><span>TOTAL ATENCIONES</span><strong id="k_total">0</strong><small>Según filtros</small></div>
+    <div class="card"><span>PROFESIONALES ACTIVOS</span><strong id="k_prof">0</strong><small>Con producción</small></div>
+    <div class="card"><span>ESTABLECIMIENTOS</span><strong id="k_eess">0</strong><small>Con producción</small></div>
+    <div class="card"><span>PROMEDIO DIARIO</span><strong id="k_daily">0</strong><small>Atenciones / día</small></div>
+    <div class="card"><span>FUA OBSERVADOS</span><strong id="k_obs">0%</strong><small>Sobre atenciones filtradas</small></div>
+    <div class="card"><span>VARIACIÓN ÚLTIMO MES</span><strong id="k_var">—</strong><small>Vs. mes anterior</small></div>
+  </section>
+
+  <section class="panel filters">
+    <h2>🔎 Filtros de análisis</h2>
+    <div class="grid">
+      <label>Año<select id="f_year"></select></label>
+      <label>Mes desde<select id="f_from"></select></label>
+      <label>Mes hasta<select id="f_to"></select></label>
+      <label>Establecimiento<select id="f_eess"></select></label>
+      <label>Tipo profesional<select id="f_tipo_prof"></select></label>
+      <label>Profesional<select id="f_prof"></select></label>
+      <label>Servicio<select id="f_servicio"></select></label>
+      <label>Estado FUA<select id="f_fua"></select></label>
+      <label>Sexo<select id="f_sexo"></select></label>
+      <label>Grupo etario<select id="f_edad"></select></label>
+      <label>Lugar de atención<select id="f_lugar"></select></label>
+      <label>Tipo de atención<select id="f_tipo_at"></select></label>
+    </div>
+    <div class="actions">
+      <button id="apply">Aplicar filtros</button>
+      <button id="clear" class="secondary">Limpiar</button>
+      <button onclick="window.print()" class="secondary">🖨 Imprimir</button>
+    </div>
+    <p class="note">El profesional se muestra como inicial(es) del nombre + apellidos completos. No se publican DNI, nombres de pacientes ni historias clínicas.</p>
+  </section>
+
+  <section class="panel">
+    <h2>📈 Tendencia y producción</h2>
+    <div class="charts two">
+      <div><canvas id="c_month"></canvas></div>
+      <div><canvas id="c_eess"></canvas></div>
+    </div>
+  </section>
+
+  <section class="panel">
+    <h2>👩‍⚕️ Personal y servicios</h2>
+    <div class="charts two">
+      <div><canvas id="c_prof"></canvas></div>
+      <div><canvas id="c_service"></canvas></div>
+    </div>
+  </section>
+
+  <section class="panel">
+    <h2>✅ Calidad y perfil de atención</h2>
+    <div class="charts three">
+      <div><canvas id="c_fua"></canvas></div>
+      <div><canvas id="c_age"></canvas></div>
+      <div><canvas id="c_place"></canvas></div>
+    </div>
+  </section>
+
+  <section class="panel">
+    <h2>📋 Resumen por profesional</h2>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Profesional</th><th>Tipo</th><th>Establecimiento</th><th>Atenciones</th><th>%</th></tr></thead>
+        <tbody id="tbl_prof"></tbody>
+      </table>
+    </div>
+  </section>
+</main>
+
+<footer>Dashboard generado desde información agregada y anonimizada.</footer>
+<script src="app.js"></script>
+</body>
+</html>
